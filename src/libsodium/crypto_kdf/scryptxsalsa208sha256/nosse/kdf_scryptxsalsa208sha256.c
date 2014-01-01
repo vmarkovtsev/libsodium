@@ -40,8 +40,8 @@
 static inline void
 blkcpy(void * dest, const void * src, size_t len)
 {
-	size_t * D = dest;
-	const size_t * S = src;
+	size_t * D = (size_t *) dest;
+	const size_t * S = (const size_t *) src;
 	size_t L = len / sizeof(size_t);
 	size_t i;
 
@@ -52,8 +52,8 @@ blkcpy(void * dest, const void * src, size_t len)
 static inline void
 blkxor(void * dest, const void * src, size_t len)
 {
-	size_t * D = dest;
-	const size_t * S = src;
+	size_t * D = (size_t *) dest;
+	const size_t * S = (const size_t *) src;
 	size_t L = len / sizeof(size_t);
 	size_t i;
 
@@ -146,7 +146,7 @@ blockmix_salsa8(const uint32_t * Bin, uint32_t * Bout, uint32_t * X, size_t r)
 static inline uint64_t
 integerify(const void * B, size_t r)
 {
-	const uint32_t * X = (const void *)((uintptr_t)(B) + (2 * r - 1) * 64);
+	const uint32_t * X = (const uint32_t *)((uintptr_t)(B) + (2 * r - 1) * 64);
 
 	return (((uint64_t)(X[1]) << 32) + X[0]);
 }

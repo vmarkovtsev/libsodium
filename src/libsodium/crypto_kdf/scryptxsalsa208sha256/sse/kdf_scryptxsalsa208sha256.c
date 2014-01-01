@@ -223,8 +223,8 @@ static void
 smix(uint8_t * B, size_t r, uint32_t N, void * V, void * XY)
 {
 	size_t s = 128 * r;
-	__m128i * X = V, * Y;
-	uint32_t * X32 = V;
+	__m128i * X = (__m128i *) V, * Y;
+	uint32_t * X32 = (uint32_t *) V;
 	uint32_t i, j;
 	size_t k;
 
@@ -241,39 +241,39 @@ smix(uint8_t * B, size_t r, uint32_t N, void * V, void * XY)
 	for (i = 1; i < N - 1; i += 2) {
 		/* 4: X <-- H(X) */
 		/* 3: V_i <-- X */
-		Y = (void *)((uintptr_t)(V) + i * s);
+		Y = (__m128i *)((uintptr_t)(V) + i * s);
 		blockmix_salsa8(X, Y, r);
 
 		/* 4: X <-- H(X) */
 		/* 3: V_i <-- X */
-		X = (void *)((uintptr_t)(V) + (i + 1) * s);
+		X = (__m128i *)((uintptr_t)(V) + (i + 1) * s);
 		blockmix_salsa8(Y, X, r);
 	}
 
 	/* 4: X <-- H(X) */
 	/* 3: V_i <-- X */
-	Y = (void *)((uintptr_t)(V) + i * s);
+	Y = (__m128i *)((uintptr_t)(V) + i * s);
 	blockmix_salsa8(X, Y, r);
 
 	/* 4: X <-- H(X) */
 	/* 3: V_i <-- X */
-	X = XY;
+	X = (__m128i *) XY;
 	blockmix_salsa8(Y, X, r);
 
-	X32 = XY;
-	Y = (void *)((uintptr_t)(XY) + s);
+	X32 = (uint32_t *) XY;
+	Y = (__m128i *)((uintptr_t)(XY) + s);
 
 	/* 7: j <-- Integerify(X) mod N */
 	j = integerify(X, r) & (N - 1);
 
 	/* 6: for i = 0 to N - 1 do */
 	for (i = 0; i < N; i += 2) {
-		__m128i * V_j = (void *)((uintptr_t)(V) + j * s);
+		__m128i * V_j = (__m128i *)((uintptr_t)(V) + j * s);
 
 		/* 8: X <-- H(X \xor V_j) */
 		/* 7: j <-- Integerify(X) mod N */
 		j = blockmix_salsa8_xor(X, V_j, Y, r) & (N - 1);
-		V_j = (void *)((uintptr_t)(V) + j * s);
+		V_j = (__m128i *)((uintptr_t)(V) + j * s);
 
 		/* 8: X <-- H(X \xor V_j) */
 		/* 7: j <-- Integerify(X) mod N */

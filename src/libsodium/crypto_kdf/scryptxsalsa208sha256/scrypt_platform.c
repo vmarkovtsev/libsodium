@@ -30,7 +30,7 @@ alloc_region(escrypt_region_t * region, size_t size)
 {
 	uint8_t * base, * aligned;
 #ifdef MAP_ANON
-	if ((base = mmap(NULL, size, PROT_READ | PROT_WRITE,
+	if ((base = (uint8_t *) mmap(NULL, size, PROT_READ | PROT_WRITE,
 #ifdef MAP_NOCORE
 	    MAP_ANON | MAP_PRIVATE | MAP_NOCORE,
 #else
@@ -40,14 +40,14 @@ alloc_region(escrypt_region_t * region, size_t size)
 		base = NULL;
 	aligned = base;
 #elif defined(HAVE_POSIX_MEMALIGN)
-	if ((errno = posix_memalign(&base, 64, size)) != 0)
+	if ((errno = posix_memalign((void **) &base, 64, size)) != 0)
 		base = NULL;
 	aligned = base;
 #else
 	base = aligned = NULL;
 	if (size + 63 < size)
 		errno = ENOMEM;
-	else if ((base = malloc(size + 63)) != NULL) {
+	else if ((base = (uint8_t *) malloc(size + 63)) != NULL) {
 		aligned = base + 63;
 		aligned -= (uintptr_t)aligned & 63;
 	}
