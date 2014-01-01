@@ -51,6 +51,14 @@ libsodium_la_SOURCES = \
 	crypto_hashblocks/sha512/ref/blocks_sha512.c \
 	crypto_hashblocks/sha512/hashblocks_sha512_api.c \
 	crypto_hashblocks/sha512/ref/api.h \
+	crypto_kdf/scryptxsalsa208sha256/crypto_scrypt-common.c \
+	crypto_kdf/scryptxsalsa208sha256/crypto_scrypt.h \
+	crypto_kdf/scryptxsalsa208sha256/scrypt_platform.c \
+	crypto_kdf/scryptxsalsa208sha256/sha256.c \
+	crypto_kdf/scryptxsalsa208sha256/sha256.h \
+	crypto_kdf/scryptxsalsa208sha256/sysendian.h \
+	crypto_kdf/scryptxsalsa208sha256/nosse/kdf_scryptxsalsa208sha256.c \
+	crypto_kdf/scryptxsalsa208sha256/sse/kdf_scryptxsalsa208sha256.c \
 	crypto_onetimeauth/crypto_onetimeauth.c \
 	crypto_onetimeauth/poly1305/onetimeauth_poly1305.c \
 	crypto_onetimeauth/poly1305/onetimeauth_poly1305_api.c \
