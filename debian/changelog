@@ -1,0 +1,24 @@
+libsodium (0.4.5-0~trusty5) trusty; urgency=low
+
+  * Reverted the previous patch, it didn't help
+  * Added pkg-config to build-depends per wgrant's advice to fix build
+
+ -- Sergey "Shnatsel" Davidoff <shnatsel@gmail.com>  Thu, 16 Jan 2014 21:50:32 +0400
+
+libsodium (0.4.5-0~trusty4) trusty; urgency=low
+
+  * Applied build-fixing patch by Guy K. Kloss
+
+ -- Sergey "Shnatsel" Davidoff <shnatsel@gmail.com>  Thu, 16 Jan 2014 21:50:32 +0400
+
+libsodium (0.4.5-0~trusty3) trusty; urgency=low
+
+  * New upstream release.
+
+ -- Sergey "Shnatsel" Davidoff <shnatsel@gmail.com>  Sun, 03 Nov 2013 00:09:27 +0400
+
+libsodium (0.4.1-0~shnatsel1~trusty3) trusty; urgency=low
+
+  * Initial release (Closes: #701962)
+
+ -- Sergey "Shnatsel" Davidoff <shnatsel@gmail.com>  Sun, 07 Jul 2013 10:53:56 +0400

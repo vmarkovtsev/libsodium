@@ -1,0 +1,16 @@
+Package: libsodium4
+Source: libsodium
+Version: 0.4.5-0~trusty5
+Architecture: amd64
+Maintainer: Sergey "Shnatsel" Davidoff <shnatsel@gmail.com>
+Installed-Size: 376
+Depends: libc6 (>= 2.14)
+Section: libs
+Priority: extra
+Homepage: https://github.com/jedisct1/libsodium
+Description: Portable, packageable NaCl-based crypto library
+ libsodium is a software library for network communication,
+ encryption,decryption, signatures, etc.
+ .
+ libsodium is a portable, cross-compilable, installable, packageable,
+ API-compatible version of NaCl.

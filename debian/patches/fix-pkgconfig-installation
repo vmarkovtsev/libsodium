@@ -1,0 +1,37 @@
+Description: Fix pkg-config file installation in restricted environments such as build servers
+ TODO: Put a short summary on the line above and replace this paragraph
+ with a longer explanation of this change. Complete the meta-information
+ with other relevant fields (see below for details).
+
+---
+The information above should follow the Patch Tagging Guidelines, please
+checkout http://dep.debian.net/deps/dep3/ to learn about the format. Here
+are templates for supplementary fields that you might want to add:
+
+Origin: other
+Bug: <url in upstream bugtracker>
+Bug-Debian: http://bugs.debian.org/<bugnumber>
+Bug-Ubuntu: https://launchpad.net/bugs/<bugnumber>
+Forwarded: no
+Reviewed-By: Sergey "Shnatsel" Davidoff <shnatsel@gmail.com>
+Last-Update: 2014-01-16
+
+--- libsodium-0.4.5.orig/Makefile.am
++++ libsodium-0.4.5/Makefile.am
+@@ -5,6 +5,7 @@ EXTRA_DIST = \
+ 	libsodium.sln \
+ 	libsodium.vcxproj \
+ 	libsodium.vcxproj.filters \
++	libsodium.pc.in \
+ 	LICENSE \
+ 	README.markdown \
+ 	THANKS
+--- libsodium-0.4.5.orig/configure.ac
++++ libsodium-0.4.5/configure.ac
+@@ -401,5 +401,6 @@ AC_CONFIG_FILES([Makefile
+                  src/libsodium/include/sodium/crypto_stream_salsa20.h
+                  test/default/Makefile
+                  test/Makefile
++                 libsodium.pc
+                  ])
+ AC_OUTPUT
